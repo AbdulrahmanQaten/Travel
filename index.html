@@ -10,8 +10,13 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet"> -->
     <!-- <script src="tailwind.js"></script> -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* أنماط عامة */
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
         body {
             transition: background-color 0.5s ease, color 0.5s ease;
         }
@@ -189,6 +194,12 @@
 
         section {
             padding-top: 100px !important;
+        }
+
+        @media max-width(780px) {
+            section {
+                padding-top: 200px !important;
+            }
         }
     </style>
 </head>
