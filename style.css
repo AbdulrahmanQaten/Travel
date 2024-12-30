@@ -170,7 +170,7 @@ section {
 .glass-container {
   position: fixed;
   top: 50%;
-  right: 20px;
+  right: 5px;
   transform: translateY(-50%);
   z-index: 1000;
   width: fit-content;
