@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة التوصيلات والسياحة</title>
+    <link hre="https://cdn.tailwindcss.com">
+    </link>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet"> -->
+    <!-- <script src="tailwind.js"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* أنماط عامة */
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .color-picker-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .color-picker-icon {
+            background-color: #3B82F6;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .color-picker-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-options {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 120px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #3B82F6;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-link.active {
+            color: #3B82F6;
+            font-weight: bold;
+        }
+
+        /* تثبيت الـ header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* أنماط الـ sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 250px;
+            height: 100vh;
+            background-color: white;
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* أنماط الوضع الليلي */
+        .dark-mode {
+            background-color: #1a202c !important;
+            /* لون خلفية داكن */
+            color: #e2e8f0;
+            /* لون نص فاتح */
+        }
+
+        .dark-mode header {
+            background-color: #2d3748;
+            /* لون خلفية header داكن */
+        }
+
+        .dark-mode footer {
+            background-color: #2d3748;
+            /* لون خلفية footer داكن */
+        }
+
+        .dark-mode .bg-white {
+            background-color: #4a5568;
+            /* لون خلفية العناصر البيضاء داكن */
+            color: #e2e8f0;
+            /* لون نص فاتح */
+        }
+
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0;
+            /* لون نص رمادي فاتح */
+        }
+
+        .dark-mode .sidebar {
+            background-color: #2d3748;
+            /* لون خلفية sidebar داكن */
+        }
+
+        .dark-mode .sidebar a {
+            color: #e2e8f0;
+            /* لون نص فاتح في sidebar */
+        }
+
+        .dark-mode .overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            /* لون overlay داكن */
+        }
+
+        section {
+            padding-top: 100px !important;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-100">
+    <!-- أداة اختيار الألوان -->
+    <div class="color-picker-container">
+        <div class="color-picker-icon" onclick="toggleColorOptions()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z" />
+            </svg>
+        </div>
+        <div class="color-options" id="colorOptions">
+            <div class="color-option bg-blue-600" onclick="changeColor('#3B82F6')"></div>
+            <div class="color-option bg-green-600" onclick="changeColor('#10B981')"></div>
+            <div class="color-option bg-purple-600" onclick="changeColor('#8B5CF6')"></div>
+            <div class="color-option bg-red-600" onclick="changeColor('#EF4444')"></div>
+            <div class="color-option bg-yellow-500" onclick="changeColor('#F59E0B')"></div>
+            <div class="color-option bg-pink-500" onclick="changeColor('#EC4899')"></div>
+        </div>
+    </div>
+
+    <!-- زر تبديل الوضع الليلي والنهاري -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path id="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            <path id="sun"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+        </svg>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <div class="text-2xl font-bold text-blue-600 mb-4 sm:mb-0">شركة التوصيلات والسياحة</div>
+            <!-- زر فتح الـ sidebar -->
+            <button class="sm:hidden p-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+            <!-- الـ navigation bar للأجهزة الكبيرة -->
+            <nav class="hidden sm:flex space-x-4">
+                <a href="#hero" class="nav-link text-gray-700 hover:text-blue-600">الرئيسية</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-blue-600">من نحن</a>
+                <a href="#services" class="nav-link text-gray-700 hover:text-blue-600">الخدمات</a>
+                <a href="#team" class="nav-link text-gray-700 hover:text-blue-600">فريق العمل</a>
+                <a href="#testimonials" class="nav-link text-gray-700 hover:text-blue-600">آراء العملاء</a>
+                <a href="#blog" class="nav-link text-gray-700 hover:text-blue-600">مدونة</a>
+                <a href="#faq" class="nav-link text-gray-700 hover:text-blue-600">الأسئلة الشائعة</a>
+                <a href="#offers" class="nav-link text-gray-700 hover:text-blue-600">العروض الخاصة</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600">اتصل بنا</a>
+            </nav>
+        </div>
+    </header>
+    <!-- الـ sidebar للأجهزة المحمولة -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-4">
+            <button class="p-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <nav class="mt-4">
+                <a href="#hero" class="block py-2 text-gray-700 hover:text-blue-600">الرئيسية</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-blue-600">من نحن</a>
+                <a href="#services" class="block py-2 text-gray-700 hover:text-blue-600">الخدمات</a>
+                <a href="#team" class="block py-2 text-gray-700 hover:text-blue-600">فريق العمل</a>
+                <a href="#testimonials" class="block py-2 text-gray-700 hover:text-blue-600">آراء العملاء</a>
+                <a href="#blog" class="block py-2 text-gray-700 hover:text-blue-600">مدونة</a>
+                <a href="#faq" class="block py-2 text-gray-700 hover:text-blue-600">الأسئلة الشائعة</a>
+                <a href="#offers" class="block py-2 text-gray-700 hover:text-blue-600">العروض الخاصة</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-blue-600">اتصل بنا</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Overlay للـ sidebar -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-cover bg-center h-96"
+        style="background-image: url('https://i.pinimg.com/474x/04/14/87/0414874d9c531d082636ffcb37b217da.jpg');">
+        <div class="container mx-auto px-4 sm:px-6 py-20 text-white text-center">
+            <h1 class="text-3xl sm:text-5xl font-bold mb-4 animate-on-scroll">اكتشف العالم معنا</h1>
+            <p class="text-lg sm:text-xl mb-8 animate-on-scroll">نقدم أفضل خدمات التوصيل والرحلات السياحية بأسعار
+                تنافسية.</p>
+            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 animate-on-scroll">احجز
+                الآن</a>
+        </div>
+    </section>
+
+    <!-- من نحن -->
+    <section id="about" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">من نحن</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-4">رسالتنا</h3>
+                <p class="text-gray-700">نحن نهدف إلى تقديم أفضل خدمات التوصيل والرحلات السياحية بجودة عالية وأسعار
+                    تنافسية.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-4">رؤيتنا</h3>
+                <p class="text-gray-700">أن نكون الشركة الرائدة في مجال التوصيل والسياحة على مستوى الوطن العربي.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فريق العمل -->
+    <section id="team" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">فريق العمل</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="فريق العمل"
+                    class="mx-auto mb-4 rounded-full h-40 w-40">
+                <h3 class="text-xl font-bold mb-2">أحمد محمد</h3>
+                <p class="text-gray-700">مدير العمليات</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="فريق العمل"
+                    class="mx-auto mb-4 rounded-full h-40 w-40">
+                <h3 class="text-xl font-bold mb-2">سارة علي</h3>
+                <p class="text-gray-700">مديرة التسويق</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="فريق العمل"
+                    class="mx-auto mb-4 rounded-full h-40 w-40">
+                <h3 class="text-xl font-bold mb-2">محمد خالد</h3>
+                <p class="text-gray-700">مطور الويب</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="فريق العمل"
+                    class="mx-auto mb-4 rounded-full h-40 w-40">
+                <h3 class="text-xl font-bold mb-2">فاطمة حسن</h3>
+                <p class="text-gray-700">مصممة الجرافيك</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- آراء العملاء -->
+    <section id="testimonials" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">آراء العملاء</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <p class="text-gray-700">"تجربة رائعة! كانت الرحلة منظمة بشكل ممتاز."</p>
+                <p class="text-sm text-gray-500 mt-4">- أحمد</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <p class="text-gray-700">"توصيل سريع ودقيق، شكرًا لكم!"</p>
+                <p class="text-sm text-gray-500 mt-4">- سارة</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <p class="text-gray-700">"خدمة عملاء ممتازة، أنصح الجميع بالتعامل معهم."</p>
+                <p class="text-sm text-gray-500 mt-4">- محمد</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- مدونة -->
+    <section id="blog" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">مدونة</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">نصائح للسفر الآمن</h3>
+                <p class="text-gray-700">تعرف على أهم النصائح للسفر الآمن والاستمتاع برحلتك.</p>
+                <a href="#" class="text-blue-600 hover:underline">اقرأ المزيد</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">أفضل الوجهات السياحية</h3>
+                <p class="text-gray-700">اكتشف أفضل الوجهات السياحية لعام 2023.</p>
+                <a href="#" class="text-blue-600 hover:underline">اقرأ المزيد</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">كيف تختار الفندق المناسب؟</h3>
+                <p class="text-gray-700">دليل شامل لاختيار الفندق المناسب لرحلتك.</p>
+                <a href="#" class="text-blue-600 hover:underline">اقرأ المزيد</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأسئلة الشائعة -->
+    <section id="faq" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">الأسئلة الشائعة</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">كيف يمكنني حجز رحلة؟</h3>
+                <p class="text-gray-700">يمكنك حجز رحلة بسهولة من خلال موقعنا أو تطبيقنا.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">هل يمكنني تعديل الحجز؟</h3>
+                <p class="text-gray-700">نعم، يمكنك تعديل الحجز من خلال صفحة "إدارة الحجز".</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- العروض الخاصة -->
+    <section id="offers" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">العروض الخاصة</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">خصم 20% على الرحلات الدولية</h3>
+                <p class="text-gray-700">استمتع بخصم 20% على جميع الرحلات الدولية.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">عروض خاصة على الفنادق</h3>
+                <p class="text-gray-700">احصل على أفضل العروض على الفنادق الفاخرة.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+                <h3 class="text-xl font-bold mb-2">عروض التوصيل المجاني</h3>
+                <p class="text-gray-700">استفد من التوصيل المجاني على جميع الطلبات.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- شركاؤنا -->
+    <section id="partners" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">شركاؤنا</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="شريك 1"
+                    class="mx-auto mb-4 h-36 w-36 rounded-lg">
+                <h3 class="text-xl font-bold mb-2">شريك 1</h3>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="شريك 2"
+                    class="mx-auto mb-4 h-36 w-36 rounded-lg">
+                <h3 class="text-xl font-bold mb-2">شريك 2</h3>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="شريك 3"
+                    class="mx-auto mb-4 h-36 w-36 rounded-lg">
+                <h3 class="text-xl font-bold mb-2">شريك 3</h3>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
+                <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="شريك 4"
+                    class="mx-auto mb-4 h-36 w-36 rounded-lg">
+                <h3 class="text-xl font-bold mb-2">شريك 4</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- الاشتراك في النشرة البريدية -->
+    <section id="newsletter" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">اشترك في النشرة البريدية</h2>
+        <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+            <form class="flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="أدخل بريدك الإلكتروني"
+                    class="p-2 border border-gray-300 rounded-lg flex-grow">
+                <button type="submit"
+                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">اشترك</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- اتصل بنا -->
+    <section id="contact" class="container mx-auto px-4 sm:px-6 py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">اتصل بنا</h2>
+        <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
+            <p class="text-gray-700">الهاتف: 0123456789</p>
+            <p class="text-gray-700">البريد الإلكتروني: info@example.com</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">شركة التوصيلات والسياحة</h3>
+                    <p>نحن هنا لخدمتك في كل ما يتعلق بالتوصيل والرحلات السياحية.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#hero" class="hover:text-blue-600">الرئيسية</a></li>
+                        <li><a href="#about" class="hover:text-blue-600">من نحن</a></li>
+                        <li><a href="#services" class="hover:text-blue-600">الخدمات</a></li>
+                        <li><a href="#contact" class="hover:text-blue-600">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">اتصل بنا</h3>
+                    <p>الهاتف: 0123456789</p>
+                    <p>البريد الإلكتروني: info@example.com</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p>© 2023 شركة التوصيلات والسياحة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: false,
+            });
+
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    } else {
+                        entry.target.classList.remove('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // تحميل الوضع المفضل من localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('moon').style.display = 'none';
+                document.getElementById('sun').style.display = 'block';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('moon').style.display = 'block';
+                document.getElementById('sun').style.display = 'none';
+            }
+
+            // Highlight العنصر النشط في Navbar
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // التركيز التلقائي على الصفحة الرئيسية عند التحميل
+            const homeLink = document.querySelector('a[href="#hero"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        });
+
+        function toggleColorOptions() {
+            const colorOptions = document.getElementById('colorOptions');
+            colorOptions.style.display = colorOptions.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeColor(color) {
+            document.querySelector('header').style.backgroundColor = color;
+            document.querySelectorAll('a, h1, h2, h3').forEach(element => {
+                element.style.color = color;
+            });
+            document.querySelectorAll('button, a.bg-blue-600').forEach(element => {
+                element.style.backgroundColor = color;
+            });
+            document.getElementById('colorOptions').style.display = 'none';
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const moon = document.getElementById('moon');
+            const sun = document.getElementById('sun');
+
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                moon.style.display = 'block';
+                sun.style.display = 'none';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                moon.style.display = 'none';
+                sun.style.display = 'block';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // فتح وإغلاق الـ sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
