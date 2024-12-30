@@ -1,0 +1,204 @@
+أنماط عامة * {
+  font-family: "Cairo", sans-serif;
+}
+
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.animate-on-scroll.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.color-picker-icon {
+  background-color: #3b82f6;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color-picker-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.color-options {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: fit-content;
+}
+
+.dark-mode .color-options {
+  background-color: #1a202c;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link.active {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+/* تثبيت الـ header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* أنماط الـ sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background-color: white;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* أنماط الوضع الليلي */
+.dark-mode {
+  background-color: #1a202c !important;
+  /* لون خلفية داكن */
+  color: #e2e8f0;
+  /* لون نص فاتح */
+}
+
+.dark-mode header {
+  background-color: #2d3748;
+  /* لون خلفية header داكن */
+}
+
+.dark-mode footer {
+  background-color: #2d3748;
+  /* لون خلفية footer داكن */
+}
+
+.dark-mode .bg-white {
+  background-color: #4a5568;
+  /* لون خلفية العناصر البيضاء داكن */
+  color: #e2e8f0;
+  /* لون نص فاتح */
+}
+
+.dark-mode .text-gray-700 {
+  color: #cbd5e0;
+  /* لون نص رمادي فاتح */
+}
+
+.dark-mode .sidebar {
+  background-color: #2d3748;
+  /* لون خلفية sidebar داكن */
+}
+
+.dark-mode .sidebar a {
+  color: #e2e8f0;
+  /* لون نص فاتح في sidebar */
+}
+
+.dark-mode .overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  /* لون overlay داكن */
+}
+
+section {
+  padding-top: 100px !important;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-top: 150px !important;
+  }
+}
+
+.glass-container {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  width: fit-content;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color-picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -12,209 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="travel.png" type="image/x-icon">
-    <style>
-        /* أنماط عامة */
-        * {
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-        }
-
-        .animate-on-scroll.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .color-picker-icon {
-            background-color: #3B82F6;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .color-picker-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .color-options {
-            display: none;
-            position: absolute;
-            top: 50px;
-            right: 0;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            width: 120px;
-        }
-
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin: 5px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .color-option:hover {
-            transform: scale(1.1);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-link.active {
-            color: #3B82F6;
-            font-weight: bold;
-        }
-
-        /* تثبيت الـ header */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        /* أنماط الـ sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 250px;
-            height: 100vh;
-            background-color: white;
-            transition: right 0.3s ease;
-            z-index: 1000;
-        }
-
-        .sidebar.open {
-            right: 0;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* أنماط الوضع الليلي */
-        .dark-mode {
-            background-color: #1a202c !important;
-            /* لون خلفية داكن */
-            color: #e2e8f0;
-            /* لون نص فاتح */
-        }
-
-        .dark-mode header {
-            background-color: #2d3748;
-            /* لون خلفية header داكن */
-        }
-
-        .dark-mode footer {
-            background-color: #2d3748;
-            /* لون خلفية footer داكن */
-        }
-
-        .dark-mode .bg-white {
-            background-color: #4a5568;
-            /* لون خلفية العناصر البيضاء داكن */
-            color: #e2e8f0;
-            /* لون نص فاتح */
-        }
-
-        .dark-mode .text-gray-700 {
-            color: #cbd5e0;
-            /* لون نص رمادي فاتح */
-        }
-
-        .dark-mode .sidebar {
-            background-color: #2d3748;
-            /* لون خلفية sidebar داكن */
-        }
-
-        .dark-mode .sidebar a {
-            color: #e2e8f0;
-            /* لون نص فاتح في sidebar */
-        }
-
-        .dark-mode .overlay {
-            background-color: rgba(0, 0, 0, 0.7);
-            /* لون overlay داكن */
-        }
-
-        section {
-            padding-top: 100px !important;
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding-top: 150px !important;
-            }
-        }
-
-        .glass-container {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            z-index: 1000;
-            width: fit-content;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .theme-toggle {
-            width: 40px;
-            height: 40px;
-            background-color: #3B82F6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .color-picker-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="font-sans bg-gray-100">
@@ -231,7 +29,7 @@
 
         <!-- أداة اختيار الألوان -->
         <div class="color-picker-container">
-            <div class="color-picker-icon" onclick="toggleColorOptions()">
+            <div class="color-picker-icon rounded" onclick="toggleColorOptions()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z" />
@@ -250,10 +48,10 @@
 
     <!-- Header -->
     <header class="bg-white shadow">
-        <div class="container mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-center">
-            <div class="text-2xl font-bold text-blue-600 mb-4 sm:mb-0">شركة التوصيلات والسياحة</div>
+        <div class="container mx-auto px-4 sm:px-6 py-4 flex items-center sm:flex-row justify-between items-center">
+            <div id="brand" class="text-2xl font-bold text-blue-600 sm:mb-0">شركة التوصيلات والسياحة</div>
             <!-- زر فتح الـ sidebar -->
-            <button class="sm:hidden p-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">
+            <button class="sm:hidden p-2 text-gray-700 bg-blue-600 text-white" onclick="toggleSidebar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 12h18M3 6h18M3 18h18" />
@@ -276,29 +74,32 @@
     <!-- الـ sidebar للأجهزة المحمولة -->
     <div class="sidebar" id="sidebar">
         <div class="p-4">
-            <button class="p-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">
+            <button class="p-2 text-gray-700 bg-blue-600 text-white rounded" onclick="toggleSidebar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <nav class="mt-4">
-                <a href="#hero" class="block py-2 text-gray-700 hover:text-blue-600"
+            <nav class="mt-4 text-blue-600">
+                <a href="#hero" class="block py-2 hover:text-blue-600 hover:font-bold"
                     onclick="toggleSidebar()">الرئيسية</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">من
+                <a href="#about" class="block py-2 hover:text-blue-600 hover:font-bold" onclick="toggleSidebar()">من
                     نحن</a>
-                <a href="#services" class="block py-2 text-gray-700 hover:text-blue-600"
+                <a href="#services" class="block py-2 hover:text-blue-600 hover:font-bold"
                     onclick="toggleSidebar()">الخدمات</a>
-                <a href="#team" class="block py-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">فريق
+                <a href="#team" class="block py-2 hover:text-blue-600 hover:font-bold" onclick="toggleSidebar()">فريق
                     العمل</a>
-                <a href="#testimonials" class="block py-2 text-gray-700 hover:text-blue-600"
-                    onclick="toggleSidebar()">آراء العملاء</a>
-                <a href="#blog" class="block py-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">مدونة</a>
-                <a href="#faq" class="block py-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">الأسئلة
+                <a href="#testimonials" class="block py-2 hover:text-blue-600 hover:font-bold"
+                    onclick="toggleSidebar()">آراء
+                    العملاء</a>
+                <a href="#blog" class="block py-2 hover:text-blue-600 hover:font-bold"
+                    onclick="toggleSidebar()">مدونة</a>
+                <a href="#faq" class="block py-2 hover:text-blue-600 hover:font-bold" onclick="toggleSidebar()">الأسئلة
                     الشائعة</a>
-                <a href="#offers" class="block py-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">العروض
+                <a href="#offers" class="block py-2 hover:text-blue-600 hover:font-bold"
+                    onclick="toggleSidebar()">العروض
                     الخاصة</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-blue-600" onclick="toggleSidebar()">اتصل
+                <a href="#contact" class="block py-2 hover:text-blue-600 hover:font-bold" onclick="toggleSidebar()">اتصل
                     بنا</a>
             </nav>
         </div>
@@ -527,117 +328,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-                once: false,
-            });
-
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    } else {
-                        entry.target.classList.remove('animate');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-
-            // تحميل الوضع المفضل من localStorage
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                document.getElementById('moon').style.display = 'none';
-                document.getElementById('sun').style.display = 'block';
-            } else {
-                document.body.classList.remove('dark-mode');
-                document.getElementById('moon').style.display = 'block';
-                document.getElementById('sun').style.display = 'none';
-            }
-
-            // Highlight العنصر النشط في Navbar
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // التركيز التلقائي على الصفحة الرئيسية عند التحميل
-            const homeLink = document.querySelector('a[href="#hero"]');
-            if (homeLink) {
-                homeLink.classList.add('active');
-            }
-        });
-
-        function toggleColorOptions() {
-            const colorOptions = document.getElementById('colorOptions');
-            colorOptions.style.display = colorOptions.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function changeColor(color) {
-            document.querySelectorAll('a, h1, h2, h3').forEach(element => {
-                element.style.color = color;
-            });
-            document.querySelectorAll('button, a.bg-blue-600').forEach(element => {
-                element.style.backgroundColor = color;
-                element.style.color = "#ffffff";
-            });
-            document.getElementById('colorOptions').style.display = 'none';
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const moon = document.getElementById('moon');
-            const sun = document.getElementById('sun');
-
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                moon.style.display = 'block';
-                sun.style.display = 'none';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.classList.add('dark-mode');
-                moon.style.display = 'none';
-                sun.style.display = 'block';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // فتح وإغلاق الـ sidebar
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        }
-        const currentYear = new Date().getFullYear();
-        // ضع السنة في العنصر المناسب
-        document.getElementById('year').textContent = currentYear;
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
