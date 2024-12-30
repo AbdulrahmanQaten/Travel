@@ -33,13 +33,6 @@
             transform: translateY(0);
         }
 
-        .color-picker-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
         .color-picker-icon {
             background-color: #3B82F6;
             width: 40px;
@@ -81,23 +74,6 @@
 
         .color-option:hover {
             transform: scale(1.1);
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 1000;
-            background-color: #3B82F6;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .theme-toggle:hover {
@@ -202,36 +178,74 @@
                 padding-top: 150px !important;
             }
         }
+
+        .glass-container {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: fit-content;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background-color: #3B82F6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .color-picker-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body class="font-sans bg-gray-100">
-    <!-- أداة اختيار الألوان -->
-    <div class="color-picker-container">
-        <div class="color-picker-icon" onclick="toggleColorOptions()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z" />
+    <div class="glass-container">
+        <!-- زر تبديل الوضع الليلي والنهاري -->
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path id="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                <path id="sun"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
             </svg>
         </div>
-        <div class="color-options" id="colorOptions">
-            <div class="color-option bg-blue-600" onclick="changeColor('#3B82F6')"></div>
-            <div class="color-option bg-green-600" onclick="changeColor('#10B981')"></div>
-            <div class="color-option bg-purple-600" onclick="changeColor('#8B5CF6')"></div>
-            <div class="color-option bg-red-600" onclick="changeColor('#EF4444')"></div>
-            <div class="color-option bg-yellow-500" onclick="changeColor('#F59E0B')"></div>
-            <div class="color-option bg-pink-500" onclick="changeColor('#EC4899')"></div>
-        </div>
-    </div>
 
-    <!-- زر تبديل الوضع الليلي والنهاري -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path id="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            <path id="sun"
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
-        </svg>
+        <!-- أداة اختيار الألوان -->
+        <div class="color-picker-container">
+            <div class="color-picker-icon" onclick="toggleColorOptions()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z" />
+                </svg>
+            </div>
+            <div class="color-options" id="colorOptions">
+                <div class="color-option bg-blue-600" onclick="changeColor('#3B82F6')"></div>
+                <div class="color-option bg-green-600" onclick="changeColor('#10B981')"></div>
+                <div class="color-option bg-purple-600" onclick="changeColor('#8B5CF6')"></div>
+                <div class="color-option bg-red-600" onclick="changeColor('#EF4444')"></div>
+                <div class="color-option bg-yellow-500" onclick="changeColor('#F59E0B')"></div>
+                <div class="color-option bg-pink-500" onclick="changeColor('#EC4899')"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Header -->
