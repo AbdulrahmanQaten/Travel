@@ -12,6 +12,14 @@ body {
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
+header {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 .animate-on-scroll.animate {
   opacity: 1;
   transform: translateY(0);
@@ -120,11 +128,6 @@ header {
   /* لون نص فاتح */
 }
 
-.dark-mode header {
-  background-color: #2d3748;
-  /* لون خلفية header داكن */
-}
-
 .dark-mode footer {
   background-color: #2d3748;
   /* لون خلفية footer داكن */
@@ -177,7 +180,6 @@ section {
   padding: 10px;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

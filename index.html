@@ -36,6 +36,7 @@
                 </svg>
             </div>
             <div class="color-options" id="colorOptions">
+                <div class="color-option bg-[#000000]" onclick="changeColor('#000000')"></div>
                 <div class="color-option bg-[#2563eb]" onclick="changeColor('#2563eb')"></div>
                 <div class="color-option bg-[#10B981]" onclick="changeColor('#10B981')"></div>
                 <div class="color-option bg-[#8B5CF6]" onclick="changeColor('#8B5CF6')"></div>
@@ -47,9 +48,10 @@
     </div>
 
     <!-- Header -->
-    <header class="bg-white shadow">
-        <div class="container mx-auto px-4 sm:px-6 py-4 flex items-center sm:flex-row justify-between items-center">
-            <div id="brand" class="text-2xl font-bold text-blue-600 sm:mb-0">شركة التوصيلات والسياحة</div>
+    <header class="">
+        <div
+            class="container header-container mx-auto px-4 sm:px-6 py-4 flex items-center sm:flex-row justify-between items-center">
+            <div id="brand" class="text-2xl font-bold text-blue-600 sm:mb-0 select-none">شركة التوصيلات والسياحة</div>
             <!-- زر فتح الـ sidebar -->
             <button class="sm:hidden p-2 text-gray-700 bg-blue-600 text-white rounded" onclick="toggleSidebar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -167,7 +169,7 @@
             <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll">
                 <img src="https://demonslayer-hinokami.sega.com/img/characters/tmb-tanjiro.png" alt="فريق العمل"
                     class="mx-auto mb-4 rounded-full h-40 w-40">
-                <h3 class="text-xl font-bold mb-2">فاطمة حسن</h3>
+                <h3 class="text-xl font-bold mb-2">فاطمة حسين</h3>
                 <p class="text-gray-700">مصممة الجرافيك</p>
             </div>
         </div>
@@ -280,8 +282,8 @@
         <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 animate-on-scroll">اشترك في النشرة البريدية</h2>
         <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll">
             <form class="flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="أدخل بريدك الإلكتروني"
-                    class="p-2 border border-gray-300 rounded-lg flex-grow">
+                <input dir="auto" type="email" placeholder="أدخل بريدك الإلكتروني"
+                    class="p-2 border border-gray-300 rounded-lg flex-grow text-black outline-none">
                 <button type="submit"
                     class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">اشترك</button>
             </form>
