@@ -112,3 +112,18 @@ function toggleSidebar() {
 const currentYear = new Date().getFullYear();
 // ضع السنة في العنصر المناسب
 document.getElementById("year").textContent = currentYear;
+
+document.addEventListener('DOMContentLoaded', function () {
+    // ... (الكود الحالي)
+
+    // إخفاء أداة اختيار الألوان عند النقر خارجها
+    document.addEventListener('click', function (event) {
+        const colorPickerIcon = document.querySelector('.color-picker-icon');
+        const colorOptions = document.getElementById('colorOptions');
+
+        // التحقق مما إذا كان النقر خارج الأيقونة وخارج أداة اختيار الألوان
+        if (!colorPickerIcon.contains(event.target) && !colorOptions.contains(event.target)) {
+            colorOptions.style.display = 'none';
+        }
+    });
+});
