@@ -132,8 +132,8 @@ document.addEventListener("DOMContentLoaded", function() {
       var typed = new Typed('#typed-text', {
         strings: [
           "أهلاً بك في موقعنا!",
-          "نقدم لكم أفضل الحلول التقنية.",
-          "تصميم حديث واحترافي.",
+          "نقدم لكم أفضل الخدمات.",
+          "رحلات إلى كل البلدان.",
           "تواصل معنا لمعرفة المزيد."
         ],
         typeSpeed: 50, // سرعة الكتابة
