@@ -144,3 +144,14 @@ document.addEventListener("DOMContentLoaded", function() {
         cursorChar: "|", // شكل المؤشر
       });
     });
+tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            glow: 'glow 3s infinite ease-in-out',
+            float: 'float 4s infinite ease-in-out',
+            rotate: 'rotate 10s infinite linear',
+          }
+        }
+      }
+    }
