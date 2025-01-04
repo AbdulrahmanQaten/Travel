@@ -73,7 +73,7 @@ function toggleColorOptions() {
 }
 
 function changeColor(color) {
-  document.querySelectorAll("a, h1, h2, h3").forEach((element) => {
+  document.querySelectorAll("a, h1, h2, h3, span, .container").forEach((element) => {
     element.style.color = color;
   });
   document.querySelectorAll("button, a.bg-blue-600").forEach((element) => {
