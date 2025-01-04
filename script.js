@@ -127,3 +127,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+      var typed = new Typed('#typed-text', {
+        strings: [
+          "أهلاً بك في موقعنا!",
+          "نقدم لكم أفضل الحلول التقنية.",
+          "تصميم حديث واحترافي.",
+          "تواصل معنا لمعرفة المزيد."
+        ],
+        typeSpeed: 50, // سرعة الكتابة
+        backSpeed: 30, // سرعة المسح
+        loop: true, // التكرار
+        showCursor: true, // إظهار المؤشر
+        cursorChar: "|", // شكل المؤشر
+      });
+    });
