@@ -302,35 +302,64 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">شركة التوصيلات والسياحة</h3>
-                    <p>نحن هنا لخدمتك في كل ما يتعلق بالتوصيل والرحلات السياحية.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
-                    <ul>
-                        <li><a href="#hero" class="hover:text-blue-600">الرئيسية</a></li>
-                        <li><a href="#about" class="hover:text-blue-600">من نحن</a></li>
-                        <li><a href="#team" class="hover:text-blue-600">فريق العمل</a></li>
-                        <li><a href="#contact" class="hover:text-blue-600">اتصل بنا</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">اتصل بنا</h3>
-                    <p>الهاتف: 0123456789</p>
-                    <p>البريد الإلكتروني: info@example.com</p>
-                </div>
-            </div>
-            <div class="text-center mt-8">
-                <p>© <span id="year"></span> شركة التوصيلات والسياحة. جميع الحقوق محفوظة.</p>
-                <p>تصميم عبد الرحمن قاطن</p>
-            </div>
+      <!-- Footer -->
+  <footer class="bg-gray-800/50 backdrop-blur-sm text-white py-8 relative overflow-hidden">
+    <!-- أشكال هندسية -->
+    <!-- دوائر متداخلة -->
+    <div class="absolute w-40 h-40 border-2 border-pink-500/20 rounded-full animate-rotate" style="top: -50px; left: -50px;"></div>
+    <div class="absolute w-60 h-60 border-2 border-yellow-400/20 rounded-full animate-rotate" style="top: -70px; left: -70px;"></div>
+
+    <!-- خطوط متقاطعة -->
+    <div class="absolute w-0.5 h-20 bg-pink-500 transform rotate-45 animate-glow" style="top: 10%; left: 20%;"></div>
+    <div class="absolute w-0.5 h-20 bg-yellow-400 transform -rotate-45 animate-glow" style="top: 10%; left: 20%;"></div>
+
+    <!-- مثلثات -->
+    <div class="absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[24px] border-b-pink-500 animate-float" style="top: 20%; right: 10%;"></div>
+    <div class="absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[24px] border-t-yellow-400 animate-float" style="bottom: 20%; left: 10%;"></div>
+
+    <!-- محتوى Footer -->
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- القسم الأول: معلومات الشركة -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">شركة التوصيلات والسياحة</h3>
+          <p>نحن هنا لخدمتك في كل ما يتعلق بالتوصيل والرحلات السياحية.</p>
         </div>
-    </footer>
+
+        <!-- القسم الثاني: روابط سريعة -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+          <ul>
+            <li><a href="#hero" class="hover:text-blue-600">الرئيسية</a></li>
+            <li><a href="#about" class="hover:text-blue-600">من نحن</a></li>
+            <li><a href="#team" class="hover:text-blue-600">فريق العمل</a></li>
+            <li><a href="#contact" class="hover:text-blue-600">اتصل بنا</a></li>
+          </ul>
+        </div>
+
+        <!-- القسم الثالث: اتصل بنا -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">اتصل بنا</h3>
+          <p>الهاتف: 0123456789</p>
+          <p>البريد الإلكتروني: info@example.com</p>
+        </div>
+      </div>
+
+      <!-- حقوق النشر واسم المصمم -->
+      <div class="text-center mt-8">
+        <p>© <span id="year"></span> شركة التوصيلات والسياحة. جميع الحقوق محفوظة.</p>
+        <!-- اسم المصمم مع تأثيرات -->
+        <div class="inline-block relative">
+          <p class="inline-block bg-gradient-to-r from-pink-500 to-yellow-400 bg-clip-text text-transparent animate-glow">
+            تصميم عبد الرحمن قاطن
+          </p>
+          <!-- دوائر صغيرة -->
+          <div class="absolute w-2 h-2 bg-pink-500 rounded-full animate-float" style="top: -5px; left: -10px;"></div>
+          <div class="absolute w-2 h-2 bg-yellow-400 rounded-full animate-float" style="bottom: -5px; right: -10px;"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
