@@ -209,6 +209,8 @@ section {
       text-align: center;
 }
 .typed-cursor {
+      font-size: 2.5rem;
+      color: #
       opacity: 1;
       animation: blink 0.7s infinite; /* تأثير وميض المؤشر */
 }
