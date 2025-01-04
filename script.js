@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var typed = new Typed('#typed-text', {
         strings: [
           "أهلاً بك في موقعنا!",
-          "اكتشف العالم معنا.,
+          "اكتشف العالم معنا.",
           "نقدم لكم أفضل الخدمات.",
           "رحلات إلى كل البلدان.",
           "تواصل معنا لمعرفة المزيد."
