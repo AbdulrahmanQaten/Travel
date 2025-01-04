@@ -207,19 +207,12 @@ section {
 
 .container {
       text-align: center;
-    }
-    #typed-text {
-      font-size: 2.5em;
-      font-weight: bold;
-      color: #ff6f61; /* لون النص */
-    }
-    .typed-cursor {
-      font-size: 2.5em;
-      color: #ff6f61; /* لون المؤشر */
+}
+.typed-cursor {
       opacity: 1;
       animation: blink 0.7s infinite; /* تأثير وميض المؤشر */
-    }
-    @keyframes blink {
+}
+@keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
-    }
+}
