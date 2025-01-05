@@ -82,6 +82,8 @@ function changeColor(color) {
   });
   document.getElementById("brand").style.color = color;
   document.getElementById("colorOptions").style.display = "none";
+  var metaTag = document.getElementById('themeColor');
+  metaTag.setAttribute('content', color);
 }
 
 function toggleTheme() {
