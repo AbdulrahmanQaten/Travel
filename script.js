@@ -157,15 +157,3 @@ tailwind.config = {
         }
       }
     }
-
-// عند فتح الـ overlay
-document.querySelector('.overlay').style.display = 'block';
-document.body.style.position = 'fixed';
-document.body.style.top = `-${window.scrollY}px`; // حفظ موضع التمرير
-
-// عند إغلاق الـ overlay
-document.querySelector('.overlay').style.display = 'none';
-const scrollY = document.body.style.top; // استعادة موضع التمرير
-document.body.style.position = '';
-document.body.style.top = '';
-window.scrollTo(0, parseInt(scrollY || '0') * -1);
