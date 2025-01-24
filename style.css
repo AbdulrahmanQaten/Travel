@@ -117,9 +117,6 @@ header {
   display: none;
 }
 
-body.no-scroll {
-  overflow: hidden;
-}
 .overlay.active {
   display: block;
 }
