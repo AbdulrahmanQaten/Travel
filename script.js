@@ -157,3 +157,13 @@ tailwind.config = {
         }
       }
     }
+
+function openOverlay() {
+  document.querySelector('.overlay').style.display = 'block';
+  document.body.classList.add('no-scroll');
+}
+
+function closeOverlay() {
+  document.querySelector('.overlay').style.display = 'none';
+  document.body.classList.remove('no-scroll');
+}
